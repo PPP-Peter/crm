@@ -1,0 +1,34 @@
+.white-text {
+    color: white;
+}
+
+.white-text:hover {
+    color: white;
+    transition: 0.4s;
+    filter: opacity(0.86);
+}
+
+.main-box i:hover {
+    transform: rotate(10deg);
+    transition: 0.4s;
+}
+
+.min-menu i {
+    margin: 20px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+    .min-menu {
+        display: none;
+    }
+}
+
+.flex {
+    display: flex;
+}
+
+.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
