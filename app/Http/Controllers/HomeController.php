@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Client;
 use App\Models\Task;
+use App\Models\User;
+use App\Models\Message;
 
 class HomeController extends Controller
 {
@@ -32,11 +34,18 @@ class HomeController extends Controller
 
         return view('dashboard', [
             'mena' =>  \DB::table('users')->latest()->take(5)->get(),
-            'projects_number' =>  Project::latest('deadline')->get()->count(),
+            'projects' =>  Project::all(),
+            'users' => User::all(),
+            'tasks' => Task::all(),
+            'clients' => Client::all(),
+            'messages' => Message::all(),
+            
+            'projects_number' =>  Project::latest('deadline')->where('status', ['open'])->get()->count() + Project::latest('deadline')->where('status', ['waiting'])->get()->count(),
             'tasks_number' =>  Task::get()->where('status', 'open')->count(),
             'clients_number' =>  Client::all()->count(),
             'new_clients' => Client::whereDate('created_at', '>', $time_now)->count(),
             'new_projects' => Project::whereDate('created_at', '>', $time_now)->count(),
+            'new_tasks' => Task::whereDate('created_at', '>', $time_now)->count(),
         ]);
     }
 }

@@ -17,13 +17,11 @@ const app = createApp({
 
     data() {
         return {
-            message: 'Vue',
             filter: '',
-            value: 20,
-            newDude: '',
-            show: true,
-            pole: ['pole1', 'pole2', 'pole3'],
+            edit: 'EDIT',
+            show: false,
             editing: false,
+            min: false,
         }
     },
     methods: {
@@ -38,23 +36,41 @@ const app = createApp({
         update() {
             this.editing = false
         },
-
         deletePost(id) {
-            axios.delete(window.location.href + '/' + id)
-                .then(response => {
-                    console.log(response);
-                });
-            setTimeout(() => window.location.href = window.location.href, 1000);
-
-            // console.log(this.$el)
-            //this.$el.querySelector('.label-danger').parentElement.parentElement.style.display = 'none';
-            // this.$el.style.display = 'none';
-
+            if (window.confirm('Do you want to delete this item?')) {
+                axios.delete(window.location.href.replace('/archive', '') + '/' + id)
+                setTimeout(() => window.location.href = window.location.href, 1000);
+            }
+        },
+        showPage() {
+            window.location.href.includes('#show') ? this.show = false : this.show = true
+            window.location.href.includes('#show') ? this.edit = 'SHOW' : this.show = true
 
         },
+        shorten(text, max) {
+            return text && text.length > max ? text.slice(0, max).split(' ').slice(0, -1).join(' ') : text
+        },
+        minimalize() {
+            if (this.min == false) {
+                this.min = true
+                document.querySelector('#page-wrapper').style.marginLeft = "80px";
+                document.querySelector('.navbar-side').style.width = "80px";
+                document.querySelector('.navbar-brand').style.width = "80px";
+                document.querySelectorAll('#main-menu span').forEach(element => element.style.display = "none")
+            } else {
+                this.min = false
+                document.querySelector('#page-wrapper').style.marginLeft = "260px";
+                document.querySelector('.navbar-side').style.width = "260px";
+                document.querySelector('.navbar-brand').style.width = "260px";
+                document.querySelectorAll('#main-menu span').forEach(element => element.style.display = "contents")
+            }
+        }
+
     },
     mounted() {
-        console.log('spustene Vue');
+        this.showPage()
+        if (document.querySelector('.chat-widget-main')) document.querySelector('.chat-widget-main').scrollTo(0, 9999)
+        document.querySelectorAll('#index .tdtext').forEach(element => element.innerText = this.shorten(element.innerHTML, 120))
     },
 
 });
@@ -65,13 +81,17 @@ app.component('new-project-part', NewProjectPart);
 import NewClientPart from './components/NewClientPart.vue';
 app.component('new-client-part', NewClientPart);
 
+
 import NewTaskPart from './components/NewTaskPart.vue';
 app.component('new-task-part', NewTaskPart);
 
+
 import FlashMessage from './components/FlashMessage.vue';
+app.component('flash-message', FlashMessage);
+
 import axios from 'axios';
 import { remove } from 'lodash';
-app.component('flash-message', FlashMessage);
+
 
 
 
