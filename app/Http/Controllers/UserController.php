@@ -23,11 +23,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $role = Role::create(['name' => 'writer']);
-        // $permission = Permission::create(['admin' => 'edit articles']);
-
         return view('users.index', [
-            'mena' =>  \DB::table('users')->latest()->get(),
+            'mena' =>  User::latest()->get(),  //\DB::table('users')->latest()->get(),
             'projects_number' =>  Project::latest('deadline')->get()->count(),
             'tasks_number' =>  Task::get()->where('status', 'open')->count(),
             'clients_number' =>  Client::all()->count(),

@@ -126,6 +126,7 @@
                  {{-- ROW 4 --}}
                 <div class="row" style="padding-bottom: 100px; `">
                     
+                    @can('create tasks')
                     {{--  FORM --}}
                     <div class="col-md-6">
                         <div id="comments-sec">
@@ -142,6 +143,7 @@
                                     </form>
                 
                         </div>
+                        @endcan
                     </div>
 
                     {{--  CHAT--}}

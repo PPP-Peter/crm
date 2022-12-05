@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(UsersTableSeeder::class);   // odkaze na novy seeder post
         //$this->call(ClientsTableSeeder::class);   // odkaze na novy seeder post
         //$this->call(ProjectsTableSeeder::class);   // odkaze na novy seeder post
-        $this->call(TasksTableSeeder::class);   // odkaze na novy seeder post, vo factory je previazaný s ostatnými postami
+        $this->call(TasksTableSeeder::class);   // odkaze na novy seeder post, vo factory je previazaný s ostatnými postami cize vytvorí aj ostatné
 
         
     }

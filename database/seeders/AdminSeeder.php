@@ -15,19 +15,39 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
+
+
+    
         User::create([
             'name' => 'admin',
             'email' => 'm.peter.k15@gmail.com',
             'email_verified_at' => now(),
-            'password' => '$2y$10$hybKw/csZJljlE9iIwgIZugD9KKLJk3HhbE6OH7ALy6CzeOkF5Q2O', // password
+            'password' => '$2y$10$wNZcFRQ1ae9CrUit/.Oblew6oZeDrufdi2qIsdKumoj7H8c.Bc0c.', // heslo123
         ])->assignRole('writer', 'admin');
 
-        User::create([
-            'name' => 'user',
-            'email' => 'p.petermanik@gmail.com',
+
+        $default_user_value = [
             'email_verified_at' => now(),
-            'password' => '$2y$10$hybKw/csZJljlE9iIwgIZugD9KKLJk3HhbE6OH7ALy6CzeOkF5Q2O', // password
-        ])->assignRole('writer');
+            'password' => '$2y$10$wNZcFRQ1ae9CrUit/.Oblew6oZeDrufdi2qIsdKumoj7H8c.Bc0c.', // heslo123
+        ];
+
+        User::create(array_merge([
+            'name' => 'manager',
+            'email' => 'info.pppcreative.@gmail.com',
+        ], $default_user_value) )->assignRole('writer', 'manager');
+
+        User::create(array_merge([
+            'name' => 'writer',
+            'email' => 'p.petermanik@gmail.com',
+        ], $default_user_value) )->assignRole('writer');
+
+        User::create(array_merge([
+            'name' => 'user',
+            'email' => 'info@pppcreative.sk',
+        ], $default_user_value) )->assignRole('user');
+
+
     }
+    
 }
 

@@ -9,8 +9,10 @@
             
             <flash-message text="{{ session('flash') }}"></flash-message>
 
+            @can('edit tasks')
             <a href="{{ Route("$items") }}/create"> <button type="button" class="btn btn-primary">Create {{ rtrim($items,"s") }}</button> </a>
-
+            @endcan
+            
             {{-- ROW 1 - TITLE --}}
             <div class="row"> 
                 <div class="col-md-12">
@@ -54,9 +56,14 @@
                                                 @include("layouts.single-layout")
 
                                                 <td>
-                                                    <a class="label label-info" href="{{Route("$items")}}/{{ $item->id }}/#show"> view </a> &nbsp&nbsp
-                                                    <a  class="post{{$item->id}} label label-warning" href="{{Route("$items")}}/{{ $item->id }}" > edit </a> &nbsp&nbsp
-                                                    <a  class="post{{$item->id}} label label-danger" @click.stop.prevent="deletePost({{$item->id}})" > delete </a> 
+                                                        <a class="label label-info" href="{{Route("$items")}}/{{ $item->id }}/#show"> view </a> &nbsp&nbsp
+                                                    @can('edit tasks')
+                                                        <a  class="post{{$item->id}} label label-warning" href="{{Route("$items")}}/{{ $item->id }}" > edit </a> &nbsp&nbsp
+                                                    @endcan
+                                                    @can('delete tasks')
+                                                        <a  class="post{{$item->id}} label label-danger" @click.stop.prevent="deletePost({{$item->id}})" > delete </a> 
+                                                    @endcan
+                                                   
                                                 </td>
                                             </tr>
                                     @endforeach

@@ -5,11 +5,15 @@
 
         <div id="page-wrapper">
             <div id="page-inner">
-{{-- {{Auth::user()->getRoleNames() }}
-{{Auth::user()->can('edit articles')}} --}}
 
+
+{{-- 
+    Check roles and permissions 
+--}}
+ {{-- {{Auth::user()->getRoleNames() }}
+{{Auth::user()->can('edit tasks')}} --}}
 {{-- @dd(Auth::user()) --}}
-{{-- {{$user}} --}}
+
                 {{-- ROW 1 - TITLE --}}
                 <div class="row"> 
                     <div class="col-md-12">
@@ -24,7 +28,7 @@
                     <div class="col-md-12">
 
                         @role('admin')
-                        {{-- @can('edit articles') --}}
+                        @can('edit tasks')
 
                          {{-- TABLE --}}
                         <div class="table-responsive">
@@ -56,7 +60,7 @@
                         </div>
                         @endrole
                        
-                        {{-- @endcan --}}
+                        @endcan
 
                     </div>
                 </div>
