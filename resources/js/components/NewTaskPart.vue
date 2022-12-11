@@ -36,7 +36,7 @@
 
         <input type="hidden" name="created_at" :value="date"> <br>
 
-        <button class="btn btn-warning" @click.stop.prevent="updatePost(itemid)"> {{ page }} </button>     
+        <button class="btn btn-success" @click.stop.prevent="updatePost(itemid)"> {{ page }} </button>     
                    
 </template>
 
@@ -85,7 +85,8 @@
                     var user_id = document.querySelectorAll('td')[5].innerText
                     var client_id = document.querySelectorAll('td')[6].innerText
                     var project_id = document.querySelectorAll('td')[7].innerText
-                    axios.post("http://localhost/crm/public/task-history/"+ task_id + "/" + title + "/" + description + "/" + status + "/" + priority + "/" + user_id + "/" +client_id + "/" + project_id)
+                    axios.post("/crm/public/task-history/"+ task_id + "/" + title + "/" + description + "/" + status + "/" + priority + "/" + user_id + "/" +client_id + "/" + project_id)
+                     //axios.post("http://localhost/cccrm/public/task-history/9/New%20task%202/description%203/open/1%20-%20low/admin/Fuga%20quia/Nihil")
                     axios.patch(window.location.href, {
                             client_id: newClient_id,
                             user_id: newUser_id,
@@ -107,17 +108,17 @@
 
 
 <style>
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
+    .slide-fade-enter-active {
+        transition: all 0.3s ease-out;
+    }
 
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
+    .slide-fade-leave-active {
+        transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+    }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
+    .slide-fade-enter-from,
+    .slide-fade-leave-to {
+        transform: translateX(20px);
+        opacity: 0;
+    }
 </style>

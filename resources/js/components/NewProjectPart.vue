@@ -31,7 +31,7 @@
         <input type="hidden" name="slug" :value=toSlag() >
 
         <br>
-        <button class="btn btn-warning" @click.stop.prevent="updatePost(itemid)" > {{ page}}</button>      
+        <button class="btn btn-success" @click.stop.prevent="updatePost(itemid)" > {{ page}}</button>      
           
 </template>
 
@@ -92,17 +92,17 @@
 
 
 <style>
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
+    .slide-fade-enter-active {
+      transition: all 0.3s ease-out;
+    }
 
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
+    .slide-fade-leave-active {
+      transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+    }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
+    .slide-fade-enter-from,
+    .slide-fade-leave-to {
+      transform: translateX(20px);
+      opacity: 0;
+    }
 </style>

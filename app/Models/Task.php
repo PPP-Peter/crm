@@ -13,7 +13,29 @@ class Task extends Model
     protected $fillable =  [  // povolene hodnoty pre ulozenie
         'title', 'user_id', 'project_id', 'client_id', 'description', 'status' , 'created_at', 'priority'
     ];
+	
+	
+	protected $appends = ['date_time', 'task_user_name', 'task_client_name'];  //,
 
+
+    // rozšírenie cez Eloquent Accessors
+    public function getDateTimeAttribute()
+    {
+        return date('d-m-Y', strtotime($this->created_at));
+    }
+
+    public function getTaskUserNameAttribute()
+    {
+        return $this->User->name;
+    }
+
+    public function getTaskClientNameAttribute()
+    {
+        return $this->client->Company;
+    }
+	
+	
+	// priradenie vztahov
     public function Client()
     {
         return $this->belongsTo('App\Models\Client');

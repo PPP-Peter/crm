@@ -25,4 +25,15 @@ class Project extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+
+    //Mutators
+    public function setTitleAttribute($value)   
+    {
+        $this->attributes['title'] = ucfirst($value);  //ucwords , 
+    }
+    public function setDescriptionAttribute($value)   
+    {
+        $this->attributes['description'] = ucfirst($value);  
+    }
+
 }

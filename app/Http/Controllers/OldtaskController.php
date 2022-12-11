@@ -25,10 +25,12 @@ class OldtaskController extends Controller
             'now' =>  Oldtask::get(),
             'items' => 'tasks',
             'table'  => ['now','task_id','title','description', 'priority', 'status', 'user_id', 'client_id', 'project_id', ],
+            
             'messages' => Message::all(),
             'users' => User::get(),
             'clients' => Client::get(),
-            'projects_number' =>  Project::get()->count(),
+
+            'projects_number' =>  Project::whereNot('status', 'close')->get()->count() ,
             'tasks_number' =>  Task::get()->where('status', 'open')->count(),
             'clients_number' =>  Client::all()->count(),        
           ]);

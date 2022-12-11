@@ -3,6 +3,7 @@
 
 @section('content')
 
+{{ prva_rola('manager') }}
 
      
         <div id="page-wrapper">
@@ -21,7 +22,7 @@
                     <div class="col-md-4">
                         <a href="{{ route('projects') }}" class="white-text">
                             <div class="main-box mb-red">
-                                <i class="fa fa-file fa-5x"></i>
+                                <i class="fa fa-file fa-4x"></i>
                                     <h5>{{ $projects_number }} Projects</h5>
                             </div>
                         </a>
@@ -30,7 +31,7 @@
                     <div class="col-md-4">
                         <a href="{{ route('tasks') }}" class="white-text">
                             <div class="main-box mb-dull">
-                                    <i class="fas fa-tasks fa-5x"></i>
+                                    <i class="fas fa-tasks fa-4x"></i>
                                     <h5>{{ $tasks_number }} Tasks In Check</h5>
                             </div>
                         </a>
@@ -40,8 +41,8 @@
                         <a href="{{ route('clients') }}" class="white-text">
                             <div class="main-box mb-pink">
                             
-                                    <i class="fas fa-user fa-5x"></i>
-                                    <h5>{{ $clients_number }} Clients</h5>
+                                    <i class="fas fa-user fa-4x"></i>
+                                    <h5>{{ $clients->count() }} Clients</h5> 
                             </div>
                         </a>
                     </div>
@@ -76,7 +77,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($mena as $meno)
+                                    @foreach ($users->take(5) as $meno)
                                         <tr>
                                             <td>{{ $meno->id }}</td>
                                             <td>{{ $meno->name }}</td>
@@ -127,10 +128,9 @@
                 <div class="row" style="padding-bottom: 100px; `">
                     
                     @can('create tasks')
-                    {{--  FORM --}}
-                    <div class="col-md-6">
-                        <div id="comments-sec">
-                
+                        {{--  FORM --}}
+                        <div class="col-md-6">
+                            <div id="comments-sec">
                                     <h3> Create new task <i class="fas fa-pencil-alt prefix"></i> </h3>
                                     <form action="{{route('tasks')}}" method="POST" class="createform">
                                         @csrf
@@ -141,8 +141,7 @@
                                             
                                         </div>
                                     </form>
-                
-                        </div>
+                            </div>
                         @endcan
                     </div>
 

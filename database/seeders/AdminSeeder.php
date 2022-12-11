@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
             'email' => 'm.peter.k15@gmail.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$wNZcFRQ1ae9CrUit/.Oblew6oZeDrufdi2qIsdKumoj7H8c.Bc0c.', // heslo123
-        ])->assignRole('writer', 'admin');
+        ])->assignRole('admin');
 
 
         $default_user_value = [
@@ -34,7 +34,7 @@ class AdminSeeder extends Seeder
         User::create(array_merge([
             'name' => 'manager',
             'email' => 'info.pppcreative.@gmail.com',
-        ], $default_user_value) )->assignRole('writer', 'manager');
+        ], $default_user_value) )->assignRole('manager');
 
         User::create(array_merge([
             'name' => 'writer',

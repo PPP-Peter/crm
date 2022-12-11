@@ -5,5 +5,9 @@
         - table ( field of strings ) podla toho ake dáta chces vytiahnuť
  --}}
 
- @include( "layouts.index-layout") 
+ {{-- 
+   namiesto: @include( "layouts.index-layout")  
+             layouts.index-layout     
+--}} 
+
 

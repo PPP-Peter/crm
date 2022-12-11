@@ -27,10 +27,10 @@
 
                  
                     <a class="active" href="{{ route("$items") }}"><i class="fa fa-check"></i>  all</a> &nbsp&nbsp&nbsp
-                    @if (  Request::segment(1) == 'projects' ||  Request::segment(1) == 'tasks' )
+                    @if (  body_class() == 'projects' ||  body_class() == 'tasks' )
                         <a href="{{ route("$items") }}/filter/open"><i class="fas fa-folder-open"></i> open</a> &nbsp&nbsp&nbsp
                         <a href="{{ route("$items") }}/filter/close"><i class="fas fa-lock"></i> close </a> &nbsp&nbsp&nbsp
-                            @if (  Request::segment(1) == 'projects' )
+                            @if (  body_class() == 'projects' )
                                 <a href="{{ route("$items") }}/filter/waiting"><i class="fas fa-pause"></i> waiting </a>&nbsp&nbsp&nbsp
                             @endif
                     @endif

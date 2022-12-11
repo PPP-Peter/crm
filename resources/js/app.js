@@ -22,17 +22,13 @@ const app = createApp({
             show: false,
             editing: false,
             min: false,
+            isActive: true,
+            info: null,
+            token: false,
+            role: 'admin'
         }
     },
     methods: {
-        add() {
-            this.pole.push(
-                this.newDude
-            )
-        },
-        remove(dude) {
-            this.pole = this.pole.filter(item => item !== dude)
-        },
         update() {
             this.editing = false
         },
@@ -45,10 +41,13 @@ const app = createApp({
         showPage() {
             window.location.href.includes('#show') ? this.show = false : this.show = true
             window.location.href.includes('#show') ? this.edit = 'SHOW' : this.show = true
-
+            window.matchMedia("(min-width: 768px)").matches ? this.isActive = true : this.isActive = false
+        },
+        toggle() {
+            this.isActive ? this.isActive = false : this.isActive = true;
         },
         shorten(text, max) {
-            return text && text.length > max ? text.slice(0, max).split(' ').slice(0, -1).join(' ') : text
+            return text && text.length > max ? text.slice(0, max).split(' ').slice(0, -1).join(' ') + '...' : text
         },
         minimalize() {
             if (this.min == false) {
@@ -64,7 +63,18 @@ const app = createApp({
                 document.querySelector('.navbar-brand').style.width = "260px";
                 document.querySelectorAll('#main-menu span').forEach(element => element.style.display = "contents")
             }
+        },
+        updatePost() {
+            axios
+                .get('/crm/public/user-json')
+                .then(response => (this.info = response.data.token))
+            this.token = true
+        },
+        zavriToken() {
+            this.token = false
         }
+
+
 
     },
     mounted() {

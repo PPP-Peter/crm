@@ -13,7 +13,7 @@
                 <div class="col-md-8">
 
                     <h3> Create new {{ $item }} <i class="fas fa-pencil-alt prefix"></i> </h3>
-                    <form  action="{{route("$item"."s")}}" method="POST" class="createform">
+                    <form enctype="multipart/form-data" action="{{route("$item"."s")}}" method="POST" class="createform">
                         @csrf
                     
                         <div class="md-form amber-textarea active-amber-textarea-2">

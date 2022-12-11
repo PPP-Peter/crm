@@ -24,8 +24,8 @@
 
                     <a href="{{ route("$items") }}"><i class="fa fa-check"></i> all </a>&nbsp&nbsp&nbsp
                     @if (  Request::segment(1) == 'projects'  )
-                    <a href="{{ route("$items") }}/filter/active"><i class="fas fa-folder-open"></i>  open</a>&nbsp&nbsp&nbsp
-                    <a href="{{ route("$items") }}/filter/inactive"><i class="fas fa-lock"></i>  close</a>&nbsp&nbsp&nbsp
+                        <a href="{{ route("$items") }}/filter/active"><i class="fas fa-folder-open"></i>  open</a>&nbsp&nbsp&nbsp
+                        <a href="{{ route("$items") }}/filter/inactive"><i class="fas fa-lock"></i>  close</a>&nbsp&nbsp&nbsp
                     @endif
                     <a  class="active" href="{{ route("$items") }}"><i class="fa fa-trash"></i> trash</a>
          

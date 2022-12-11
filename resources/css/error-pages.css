@@ -10,7 +10,7 @@ body {
     justify-content: center;
     height: 100vh;
     padding: 0px 30px;
-    background: #ddd;
+    background: #00CA79;
 }
 
 .wrapper {
@@ -58,15 +58,12 @@ button {
     padding: 8px 24px;
     font-size: 16px;
     cursor: pointer;
-    background: #62AD9B;
-    color: #fff;
+    background: white;
+    color: black;
     border: none;
     box-shadow: 0 4px 8px 0 #ccc;
 }
 
-body {
-    background-color: rgba(198, 155, 109, .3);
-}
 
 #error-404-img {
     max-width: 700px;

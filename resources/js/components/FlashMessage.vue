@@ -28,7 +28,6 @@
             }
         },
          mounted() {
-            console.log('Component mounted.')
             if(this.text){
                 this.show()
             }
@@ -39,16 +38,16 @@
 </script>
 
 <style>
-.alert{
-background-color: #00CA79; 
-    color:white;
-    position:absolute; 
-    z-index:999; 
-    padding:10px 20px;
-    right:100px;
-}
-span{
-    cursor:pointer;
-    margin-left:5px;
-}
+    .alert{
+        background-color: rgb(69, 189, 91); 
+        color:white;
+        position:absolute; 
+        z-index:999; 
+        padding:10px 20px;
+        right:100px;
+    }
+        span{
+        cursor:pointer;
+        margin-left:5px;
+    }
 </style>

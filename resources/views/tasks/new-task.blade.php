@@ -1,4 +1,6 @@
-<h3> Create new Task <i class="fas fa-pencil-alt prefix"></i> </h3>
+{{-- /Task v PHP --}}
+
+{{-- <h3> Create new Task <i class="fas fa-pencil-alt prefix"></i> </h3>
 <form action="{{route('tasks')}}" method="POST" class="">
     @csrf
 
@@ -28,4 +30,4 @@
     </select><br>
 
     <button type="send" class="btn btn-warning">Send</button>
-</form>
+</form> --}}

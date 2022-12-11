@@ -35,10 +35,12 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+
+        $validator =  $request->validate([
             'message'=>'required',
         ]);
 
+       
         Message::create(
             $request->all()
         );

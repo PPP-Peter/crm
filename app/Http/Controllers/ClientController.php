@@ -8,7 +8,7 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\Message;
 use Illuminate\Http\Request;
-
+use Exception;
 
 class ClientController extends Controller
 {
@@ -20,16 +20,33 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //return Client::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+
+        try {
+          $client =   Client::latest()->get();
+        } catch (Exception $e) {
+          
+            $message = $e->getMessage();
+            var_dump('Exception Message: '. $message);
+  
+            $code = $e->getCode();       
+            var_dump('Exception Code: '. $code);
+  
+            $string = $e->__toString();       
+            var_dump('Exception String: '. $string);
+  
+            exit;
+        }
+
+
         return view ('layouts.index-layout', [   // namiesto  clients.index
-            'collection' =>  Client::all(),
-            // 'open_projects' => Client::with('projects')->get(),  //->where('status', 'open')->count()
+            'collection' =>  Client::latest()->get(),
             'items' => 'clients',
             'table'  => ['id','Company','Address','VAT'],
-            'messages' => Message::all(),
             
+            'messages' => Message::all(),
             'users' => User::get(),
-            'projects_number' =>  Project::get()->count(),
+            
+            'projects_number' =>  Project::whereNot('status', 'close')->get()->count() ,
             'tasks_number' =>  Task::get()->where('status', 'open')->count(),
             'clients_number' =>  Client::all()->count(),        
           ]);
@@ -37,7 +54,6 @@ class ClientController extends Controller
 
     public function archive()
     {
-         //return Client::all();
         return view ('clients.archive', [
             'collection' =>  Client::all(),
             'table'  => ['id','Company','Address','VAT', 'deleted_at'],
@@ -75,11 +91,20 @@ class ClientController extends Controller
             'Company'=>'required',
             'Address'=>'required',
             'VAT'=>'required|integer',
+            'image'=>'required'
         ]);
 
-        Client::create(
+
+        $client = Client::create(
             $request->all()
         );
+
+        $client->addMediaFromRequest('image')->toMediaCollection();
+
+        // $yourModel = YourModel::find(1);
+        //     $yourModel
+        //     ->addMedia($pathToFile)
+        //     ->toMediaCollection();
           
         return redirect('clients')->with('flash' , 'Added new Client');
 

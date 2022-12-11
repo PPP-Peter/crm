@@ -20,22 +20,6 @@ class ProjectController extends Controller
     }
 
 
-    public function projects_status($status)
-    {
-        
-        return view('projects.index', [
-            'collection' =>  Project::where('status', $status)->get(),
-            'items' => 'projects',
-            'table'  => ['id','title','deadline','description', 'status', 'user', 'client'],
-            'messages' => Message::all(),
-            'users' => User::get(),
-            'clients' => Client::all(),
-            'projects_number' =>  Project::get()->count(),
-            'tasks_number' =>  Task::get()->where('status', 'open')->count(),
-            'clients_number' =>  Client::all()->count(), 
-          ]);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -43,16 +27,35 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view ('projects.index', [
-            'collection' =>  Project::all(),
+        return view ('layouts.index-layout', [
+            'collection' =>  Project::latest()->get(),
             'items' => 'projects',
             'table'  => ['id','title','deadline','description', 'status', 'user', 'client'],
-            'messages' => Message::all(),
-            // 'active_projects' => Project::get()->where('status', 'open'),
 
+            'messages' => Message::all(),
             'users' => User::get(),
             'clients' => Client::all(),
-            'projects_number' =>  Project::get()->count(),
+
+            'projects_number' =>  Project::whereNot('status', 'close')->get()->count() ,
+            'tasks_number' =>  Task::get()->where('status', 'open')->count(),
+            'clients_number' =>  Client::all()->count(), 
+          ]);
+    }
+
+
+    public function projects_status($status)
+    {
+        
+        return view('layouts.index-layout', [
+            'collection' =>  Project::where('status', $status)->latest()->get(),
+            'items' => 'projects',
+            'table'  => ['id','title','deadline','description', 'status', 'user', 'client'],
+
+            'messages' => Message::all(),
+            'users' => User::get(),
+            'clients' => Client::all(),
+
+            'projects_number' =>  Project::whereNot('status', 'close')->get()->count() ,
             'tasks_number' =>  Task::get()->where('status', 'open')->count(),
             'clients_number' =>  Client::all()->count(), 
           ]);
@@ -141,8 +144,6 @@ class ProjectController extends Controller
 
         //  $admins= ['m.peter.k15@gmail.com' , 'p.petermanik@gmail.com'];
         //  Mail::to($admins)->send(new TestEmail('data'));
-  
-
         return redirect('projects')->with('flash' , 'Update Project');
     }
 
@@ -156,15 +157,14 @@ class ProjectController extends Controller
     {
         if($project->trashed()){
             $project->forceDelete();
-            return  redirect('projects');
+            return  redirect('projects')->with('flash' , "Project permanently deleted");
         }
 
-        $project->delete();
+        $project->delete()->with('flash' , "Project deleted");
     }
 
     public function archive()
     {
-         //return project::all();
         return view ('projects.archive', [
             'collection' =>  project::all(),
             'table'  => ['id','title','deadline','description', 'status', 'user', 'client', 'deleted_at'],
@@ -181,4 +181,7 @@ class ProjectController extends Controller
          return redirect('projects')->with('flash' , "Restore project");
 
     }
+
+
+
 }

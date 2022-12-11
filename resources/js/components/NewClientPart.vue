@@ -11,7 +11,9 @@
 
         <input type="hidden" name="created_at" :value="date"> <br>
 
-        <button class="btn btn-warning" @click.stop.prevent="updatePost(itemid)" > {{ page }}</button>   
+        <input name="image"  v-show="page=='Create'" type="file" id="image" class="form-control" /> 
+
+        <button class="btn btn-success" @click.stop.prevent="updatePost(itemid)" > {{ page }}</button>   
                       
 </template>
 
@@ -43,11 +45,11 @@
                             Company: document.querySelector('.Company').value,
                             Address: document.querySelector('.Address').value
                         })
-                    setTimeout(() => window.location.href = window.location.href, 500);
+                   setTimeout(() => window.location.href = window.location.href, 500);
                 }
             },
             identif (){
-              document.querySelector('form.createform') ? this.page =' Create ' : this.page = ' Update '
+              document.querySelector('form.createform') ? this.page ='Create' : this.page = 'Update'
             }
         },
     }
@@ -55,17 +57,17 @@
 
 
 <style>
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
+    .slide-fade-enter-active {
+        transition: all 0.3s ease-out;
+    }
 
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
+    .slide-fade-leave-active {
+        transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+    }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
+    .slide-fade-enter-from,
+    .slide-fade-leave-to {
+        transform: translateX(20px);
+        opacity: 0;
+    }
 </style>
