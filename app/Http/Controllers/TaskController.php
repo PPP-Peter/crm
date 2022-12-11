@@ -192,11 +192,14 @@ class TaskController extends Controller
     public function task_api( Request $request, Task $task)
     {
 
-        // set task by request
-        if ( $request->status ) {   // if have status
+         // set task by request
+         if ( $request->status && $request->name) {   // if have status and name
             $task = Task::where('title', $request->name)->where('status', $request->status)->limit($request->limit)->get();
         }
-        else if ( $request->priority ) {   // if have  priority
+		else if ( $request->status ) {   // if have only status
+            $task = Task::where('status', $request->status)->limit($request->limit)->get();
+        }
+        else if ( $request->priority ) {   // if have priority and name
             $task = Task::where('title', $request->name)->where('priority', $request->priority)->limit($request->limit)->get();
         }
         else {  // if have onle task name
@@ -209,10 +212,9 @@ class TaskController extends Controller
         if ( $request->priority && !in_array( $request->priority, $priority_array ) ){   // respons if not have correct priority
             return  response()->json(['message'=>'Wrong priority value'],417);
         }  
-        if ( !$task || empty($request->name) || count($task) < 1 || !$request->name ) { // respons if not found
+        if ( !$task || empty($request) || count($task) < 1  ) { // respons if not found
             return response()->json(['message'=>'task not found'], 404);
         }
- 
 
         return $task;
     }
